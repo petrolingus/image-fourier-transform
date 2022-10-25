@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+group 'me.petrolingus.ift'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'me.petrolingus.ift.Main'
+}
+
+javafx {
+    version = '18.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
