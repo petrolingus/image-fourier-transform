@@ -2,37 +2,244 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <HBox spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.petrolingus.ift.Controller">
    <children>
-      <GridPane hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" vgap="4.0">
+      <VBox spacing="8.0" style="-fx-border-color: lightgray;">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+                  <Label text="Gaussian Dome" />
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+               </children>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox>
+               <children>
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                      <RowConstraints vgrow="NEVER" />
+                      <RowConstraints vgrow="NEVER" />
+                      <RowConstraints vgrow="NEVER" />
+                        <RowConstraints vgrow="NEVER" />
+                        <RowConstraints vgrow="NEVER" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="a1" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="x1" />
+                        <TextField fx:id="y1" text="0.3" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <TextField fx:id="sx1" text="0.2" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <TextField fx:id="sy1" text="0.2" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <TextField fx:id="a2" text="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField text="0.3" GridPane.columnIndex="2" GridPane.rowIndex="3" fx:id="x2" />
+                        <TextField fx:id="y2" text="-0.3" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <TextField fx:id="sx2" text="0.2" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <TextField fx:id="sy2" text="0.2" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <TextField fx:id="a3" text="1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField text="-0.3" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="x3" />
+                        <TextField fx:id="y3" text="-0.3" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <TextField fx:id="sx3" text="0.2" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <TextField fx:id="sy3" text="0.2" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <Label text="Dome 1" GridPane.rowIndex="2" />
+                        <Label text="Dome 2" GridPane.rowIndex="3" />
+                        <Label text="Dome 3" GridPane.rowIndex="4" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                      <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGenerateImageButton" text="Generate" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <TextField fx:id="generatedImageWidth" text="256" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="generatedImageHeight" text="256" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <Label text="Image Size" GridPane.rowIndex="1" />
+                        <Label text="Width" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Height" GridPane.columnIndex="3">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+            <VBox spacing="2.0">
+               <children>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+                  <Label text="Custom Image" />
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+               </children>
+            </VBox>
+            <GridPane hgap="4.0" vgap="4.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoadImageButton" text="Load Image" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <TextField fx:id="targetImageWidth" text="256" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="targetImageHeight" text="256" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <Label text="ITarget Image Size" GridPane.rowIndex="1" />
+                  <Label text="Width" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Height" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <VBox spacing="2.0">
+               <children>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+                  <Label text="Settings" />
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets left="-8.0" right="-8.0" />
+                     </padding>
+                  </Separator>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <HBox>
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Noise Level" />
+                        <TextField fx:id="noiseLevel" text="0.5" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Threshold" />
+                        <TextField fx:id="threshold" text="0.2" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Filter Type" />
+                        <ChoiceBox fx:id="filterType" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="300.0" minHeight="300.0" prefHeight="300.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="300.0" minHeight="300.0" prefHeight="300.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <StackPane fx:id="originalImagePane" prefHeight="360.0" prefWidth="360.0" style="-fx-border-color: lightgray;" />
+            <ImageView fx:id="originalImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="brightnessImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="noisedImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fx:id="spectrumImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView fx:id="filteredImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fx:id="restoredImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
       </GridPane>
-      <VBox prefHeight="720.0" prefWidth="560.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#onOpenImage" text="Open Image" />
-         </children>
-      </VBox>
    </children>
    <padding>
       <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
