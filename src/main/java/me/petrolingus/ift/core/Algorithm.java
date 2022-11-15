@@ -75,7 +75,7 @@ public class Algorithm {
         return result;
     }
 
-    public static double[][] transformComplexPixels(Complex[][] pixels) {
+    public static double[][] transformComplexPixels(Complex[][] pixels, SpectrumType spectrumType) {
 
         int width = pixels[0].length;
         int height = pixels.length;
@@ -83,7 +83,11 @@ public class Algorithm {
         double[][] result = new double[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                result[i][j] = Math.log1p(pixels[i][j].abs());
+                if (spectrumType == SpectrumType.LINEAR) {
+                    result[i][j] = pixels[i][j].abs();
+                } else {
+                    result[i][j] = Math.log1p(pixels[i][j].abs());
+                }
             }
         }
 

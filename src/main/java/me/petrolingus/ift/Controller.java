@@ -8,6 +8,7 @@ import javafx.scene.image.*;
 import me.petrolingus.ift.core.Algorithm;
 import me.petrolingus.ift.core.FilterType;
 import me.petrolingus.ift.core.ImageFourierTransform;
+import me.petrolingus.ift.core.SpectrumType;
 import me.petrolingus.ift.generators.GaussianDomeGenerator;
 import me.petrolingus.ift.generators.GaussianDomeGenerator.Dome;
 import org.apache.commons.math3.complex.Complex;
@@ -46,6 +47,7 @@ public class Controller {
     public TextField noiseLevel;
     public TextField threshold;
     public ChoiceBox<FilterType> filterType;
+    public ChoiceBox<SpectrumType> spectrumType;
 
     public ImageView originalImageView;
     public ImageView brightnessImageView;
@@ -63,6 +65,15 @@ public class Controller {
 
         filterType.setItems(filterTypes);
         filterType.setValue(filterType.getItems().get(0));
+
+        ObservableList<SpectrumType> spectrumTypes = FXCollections.observableArrayList(
+                SpectrumType.LINEAR,
+                SpectrumType.LOG_1P
+        );
+
+        spectrumType.setItems(spectrumTypes);
+        spectrumType.setValue(spectrumType.getItems().get(0));
+
     }
 
     public void onGenerateImageButton() {
@@ -135,7 +146,7 @@ public class Controller {
 
         // Calculate spectrum
         Complex[][] spectrum = Algorithm.shuffleQuarters(ImageFourierTransform.fft(noisedPixels));
-        double[][] spectrumPixels = Algorithm.transformComplexPixels(spectrum);
+        double[][] spectrumPixels = Algorithm.transformComplexPixels(spectrum, spectrumType.getValue());
         spectrumImageView.setImage(getImageFromPixels(spectrumPixels));
 
         // Filtering spectrum
@@ -145,12 +156,12 @@ public class Controller {
         } else {
             filteredSpectrum = Algorithm.lowPassFiltering(spectrum, Double.parseDouble(threshold.getText()));
         }
-        double[][] filteredSpectrumPixels = Algorithm.transformComplexPixels(filteredSpectrum);
+        double[][] filteredSpectrumPixels = Algorithm.transformComplexPixels(filteredSpectrum, spectrumType.getValue());
         filteredImageView.setImage(getImageFromPixels(filteredSpectrumPixels));
 
         // Restore image
         Complex[][] restored = ImageFourierTransform.ifft(filteredSpectrum);
-        double[][] restoredPixels = Algorithm.transformComplexPixels(restored);
+        double[][] restoredPixels = Algorithm.transformComplexPixels(restored, SpectrumType.LINEAR);
         restoredImageView.setImage(getImageFromPixels(restoredPixels));
     }
 

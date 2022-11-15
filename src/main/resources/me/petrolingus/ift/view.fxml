@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.petrolingus.ift.Controller">
    <children>
       <VBox spacing="8.0" style="-fx-border-color: lightgray;">
@@ -212,6 +211,12 @@
                      <children>
                         <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Filter Type" />
                         <ChoiceBox fx:id="filterType" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Spectrum Type" />
+                        <ChoiceBox fx:id="spectrumType" prefWidth="150.0" />
                      </children>
                   </HBox>
                </children>
