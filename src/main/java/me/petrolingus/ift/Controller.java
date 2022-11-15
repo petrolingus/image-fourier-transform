@@ -48,6 +48,8 @@ public class Controller {
     public TextField threshold;
     public ChoiceBox<FilterType> filterType;
     public ChoiceBox<SpectrumType> spectrumType;
+    public TextField epsilon1;
+    public TextField epsilon2;
 
     public ImageView originalImageView;
     public ImageView brightnessImageView;
@@ -163,6 +165,29 @@ public class Controller {
         Complex[][] restored = ImageFourierTransform.ifft(filteredSpectrum);
         double[][] restoredPixels = Algorithm.transformComplexPixels(restored, SpectrumType.LINEAR);
         restoredImageView.setImage(getImageFromPixels(restoredPixels));
+
+        // Calculation epsilon1
+        epsilon1.setText(Double.toString(calculateEpsilon(originalPixels, noisedPixels)));
+        epsilon2.setText(Double.toString(calculateEpsilon(originalPixels, restoredPixels)));
+    }
+
+    private double calculateEpsilon(double[][] originalPixels, double[][] processedPixels) {
+
+        int w = originalPixels[0].length;
+        int h = originalPixels.length;
+
+        double numerator = 0;
+        double denominator = 0;
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                double a = originalPixels[i][j];
+                double b = processedPixels[i][j];
+                numerator += (a - b) * (a - b);
+                denominator += a * a;
+            }
+        }
+
+        return numerator / denominator;
     }
 
     private Dome createDome(TextField a, TextField cx, TextField cy, TextField sx, TextField sy) {
