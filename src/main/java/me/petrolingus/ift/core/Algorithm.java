@@ -36,7 +36,7 @@ public class Algorithm {
         }
 
         // Calculate noise multiplier
-        double alpha = Math.sqrt((noiseLevel / 100.0) * (imageEnergy / noiseEnergy));
+        double alpha = Math.sqrt(imageEnergy / noiseEnergy / Math.pow(10, 0.1 * noiseLevel));
 
         // Apply noise
         double[][] result = new double[height][width];

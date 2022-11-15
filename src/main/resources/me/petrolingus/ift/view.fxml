@@ -197,8 +197,8 @@
                <children>
                   <HBox>
                      <children>
-                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Noise Level" />
-                        <TextField fx:id="noiseLevel" text="0.5" />
+                        <Label maxHeight="1.7976931348623157E308" prefWidth="100.0" text="SNR, dB" />
+                        <TextField fx:id="noiseLevel" text="10" />
                      </children>
                   </HBox>
                   <HBox>
