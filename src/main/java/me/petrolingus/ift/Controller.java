@@ -130,9 +130,7 @@ public class Controller {
         int height = Integer.parseInt(targetImageHeight.getText());
         double[][] originalPixels = new double[height][width];
         for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                originalPixels[i][j] = rawPixels[i][j];
-            }
+            System.arraycopy(rawPixels[i], 0, originalPixels[i], 0, width);
         }
 
         process(originalPixels);
