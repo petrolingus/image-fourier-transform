@@ -2,6 +2,7 @@ package me.petrolingus.ift;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
@@ -11,6 +12,7 @@ import me.petrolingus.ift.core.ImageFourierTransform;
 import me.petrolingus.ift.core.SpectrumType;
 import me.petrolingus.ift.generators.GaussianDomeGenerator;
 import me.petrolingus.ift.generators.GaussianDomeGenerator.Dome;
+import me.petrolingus.ift.math.Interpolation;
 import org.apache.commons.math3.complex.Complex;
 
 import java.io.FileInputStream;
@@ -43,6 +45,7 @@ public class Controller {
 
     public TextField targetImageWidth;
     public TextField targetImageHeight;
+    public CheckBox autoResize;
 
     public TextField noiseLevel;
     public TextField threshold;
@@ -58,6 +61,8 @@ public class Controller {
     public ImageView filteredImageView;
     public ImageView restoredImageView;
 
+    private static double[][] originalPixels;
+
     public void initialize() {
 
         ObservableList<FilterType> filterTypes = FXCollections.observableArrayList(
@@ -66,7 +71,7 @@ public class Controller {
         );
 
         filterType.setItems(filterTypes);
-        filterType.setValue(filterType.getItems().get(0));
+        filterType.setValue(filterType.getItems().get(1));
 
         ObservableList<SpectrumType> spectrumTypes = FXCollections.observableArrayList(
                 SpectrumType.LINEAR,
@@ -74,7 +79,7 @@ public class Controller {
         );
 
         spectrumType.setItems(spectrumTypes);
-        spectrumType.setValue(spectrumType.getItems().get(0));
+        spectrumType.setValue(spectrumType.getItems().get(1));
 
     }
 
@@ -88,15 +93,15 @@ public class Controller {
         Dome dome3 = createDome(a3, x3, y3, sx3, sy3);
         GaussianDomeGenerator generator = new GaussianDomeGenerator(List.of(dome1, dome2, dome3));
 
-        double[][] originalPixels = generator.getPixels(width, height);
+        originalPixels = generator.getPixels(width, height);
         originalImageView.setImage(getImageFromPixels(originalPixels));
-        process(originalPixels);
+        onProcessButton();
     }
 
     public void onLoadImageButton() {
 
         // Load image resource
-        URL resource = Main.class.getResource("images/aqua256.jpg");
+        URL resource = Main.class.getResource("images/chika1200x630.png");
         if (resource == null) {
             System.err.println("Image not found!");
             return;
@@ -108,7 +113,7 @@ public class Controller {
 
             Image image = new Image(inputStream);
             originalImageView.setImage(image);
-            originalImageView.setPreserveRatio(false);
+            originalImageView.setPreserveRatio(true);
 
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
@@ -124,16 +129,56 @@ public class Controller {
             throw new RuntimeException(e);
         }
 
-        // TODO: rawPixels bilinear interpolation
-
         int width = Integer.parseInt(targetImageWidth.getText());
         int height = Integer.parseInt(targetImageHeight.getText());
-        double[][] originalPixels = new double[height][width];
-        for (int i = 0; i < height; i++) {
-            System.arraycopy(rawPixels[i], 0, originalPixels[i], 0, width);
+        originalPixels = imageUpdateForFourier(rawPixels, width, height, autoResize.isSelected());
+        onProcessButton();
+    }
+
+    public void onProcessButton() {
+        process(originalPixels);
+    }
+
+    public double[][] imageUpdateForFourier(double[][] image, int targetWidth, int targetHeight, boolean autoSize) {
+
+        int width = image[0].length;
+        int height = image.length;
+        int newWidth = 1;
+        int newHeight = 1;
+
+        if (autoSize) {
+            while (newWidth < width) {
+                newWidth *= 2;
+            }
+            while (newHeight < height) {
+                newHeight *= 2;
+            }
+        } else {
+            newWidth = targetWidth;
+            newHeight = targetHeight;
         }
 
-        process(originalPixels);
+        System.out.println(newWidth + ":" + newHeight);
+
+        double[][] updatedImage = new double[newHeight][newWidth];
+
+        for (int y = 0; y < newHeight; y++) {
+            for (int x = 0; x < newWidth; x++) {
+                double gx = (double)x / newWidth * (width - 1);
+                double gy = (double)y / newHeight * (height - 1);
+                int gxi = (int) gx;
+                int gyi = (int) gy;
+                try {
+                    double v = Interpolation.blerp(image[gyi][gxi], image[gyi + 1][gxi], image[gyi][gxi + 1], image[gyi + 1][gxi + 1], gx - gxi, gy - gyi);
+                    updatedImage[y][x] = v;
+                } catch (Exception e) {
+                    System.out.println(gxi + ":" + gyi);
+                }
+
+            }
+        }
+
+        return updatedImage;
     }
 
     private void process(double[][] originalPixels) {
@@ -143,6 +188,7 @@ public class Controller {
         // Generate noise
         double[][] noisedPixels = Algorithm.setNoise(originalPixels, Double.parseDouble(noiseLevel.getText()));
         noisedImageView.setImage(getImageFromPixels(noisedPixels));
+        noisedImageView.setPreserveRatio(true);
 
         // Calculate spectrum
         Complex[][] spectrum = Algorithm.shuffleQuarters(ImageFourierTransform.fft(noisedPixels));
