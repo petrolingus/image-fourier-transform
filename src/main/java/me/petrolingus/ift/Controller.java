@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
+import javafx.stage.FileChooser;
 import me.petrolingus.ift.core.Algorithm;
 import me.petrolingus.ift.core.FilterType;
 import me.petrolingus.ift.core.ImageFourierTransform;
@@ -15,6 +16,7 @@ import me.petrolingus.ift.generators.GaussianDomeGenerator.Dome;
 import me.petrolingus.ift.math.Interpolation;
 import org.apache.commons.math3.complex.Complex;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -101,15 +103,18 @@ public class Controller {
     public void onLoadImageButton() {
 
         // Load image resource
-        URL resource = Main.class.getResource("images/chika1200x630.png");
-        if (resource == null) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "\\IdeaProjects\\image-fourier-transform\\src\\main\\resources\\me\\petrolingus\\ift\\images"));
+        File file = fileChooser.showOpenDialog(originalImageView.getScene().getWindow());
+
+        if (file == null) {
             System.err.println("Image not found!");
             return;
         }
 
         // Read raw pixels
         double[][] rawPixels;
-        try (FileInputStream inputStream = new FileInputStream(resource.getPath())) {
+        try (FileInputStream inputStream = new FileInputStream(file.getPath())) {
 
             Image image = new Image(inputStream);
             originalImageView.setImage(image);
