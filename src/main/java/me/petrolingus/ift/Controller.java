@@ -187,6 +187,7 @@ public class Controller {
 
     private void process(double[][] originalPixels) {
 
+        originalPixels = Algorithm.normalize(originalPixels);
         brightnessImageView.setImage(getImageFromPixels(originalPixels));
 
         // Generate noise
