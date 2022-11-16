@@ -19,7 +19,6 @@ import org.apache.commons.math3.complex.Complex;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 public class Controller {
@@ -169,8 +168,8 @@ public class Controller {
 
         for (int y = 0; y < newHeight; y++) {
             for (int x = 0; x < newWidth; x++) {
-                double gx = (double)x / newWidth * (width - 1);
-                double gy = (double)y / newHeight * (height - 1);
+                double gx = (double) x / newWidth * (width - 1);
+                double gy = (double) y / newHeight * (height - 1);
                 int gxi = (int) gx;
                 int gyi = (int) gy;
                 try {
